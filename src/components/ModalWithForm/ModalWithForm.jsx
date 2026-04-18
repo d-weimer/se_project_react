@@ -1,13 +1,18 @@
 import "./ModalWithForm.css";
+import modalClose from "../../assets/modal-close.svg";
 
 function ModalWithForm() {
   return (
     <div className="modal">
       <div className="modal__content">
-        <h2 className="modal__title">New garment</h2>
         <button type="button" className="modal__close">
-          CLOSE
+          <img
+            src={modalClose}
+            alt="Close Button"
+            className="modal__close-button"
+          />
         </button>
+        <p className="modal__title">New garment</p>
         <form className="modal__form">
           <label htmlFor="name" className="modal__label">
             Name{" "}
@@ -51,10 +56,10 @@ function ModalWithForm() {
               Cold
             </label>
           </fieldset>
-          <button type="submit" className="modal__submit">
-            Add garment
-          </button>
         </form>
+        <button type="submit" className="modal__submit">
+          Add garment
+        </button>
       </div>
     </div>
   );
