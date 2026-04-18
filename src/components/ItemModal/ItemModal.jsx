@@ -1,5 +1,5 @@
 import "./ItemModal.css";
-import modalClose from "../../assets/modal-close.svg";
+import modalClose from "../../assets/modal-close-white.svg";
 
 function ItemModal({ activeModal, card, onClose }) {
   return (
