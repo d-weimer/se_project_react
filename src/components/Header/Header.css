@@ -28,6 +28,7 @@
   cursor: pointer;
   padding: 0;
   margin: 0;
+  font-weight: 700;
 }
 
 .header__username {

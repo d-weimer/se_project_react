@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 85px 0 24px;
+  padding: 0 0 24px;
+  margin: 85px 0 0;
   font-family: "Cabinet-Grotesk", sans-serif;
   font-weight: 500;
   font-size: 16px;
