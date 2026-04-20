@@ -21,10 +21,12 @@ function ModalWithForm({
           />
         </button>
         <p className="modal__title">{titleText}</p>
-        <form className="modal__form">{children}</form>
-        <button type="submit" className="modal__submit">
-          {buttonText}
-        </button>
+        <form className="modal__form">
+          {children}
+          <button type="submit" className="modal__submit">
+            {buttonText}
+          </button>
+        </form>
       </div>
     </div>
   );

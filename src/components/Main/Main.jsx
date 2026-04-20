@@ -19,19 +19,15 @@ function Main({ weatherData, handleCardClick }) {
           Today is {weatherData.temp.F}&deg; F / You may want to wear:
         </p>
         <ul className={listClassName}>
-          {defaultClothingItems
-            .filter((item) => {
-              return item.weather === weatherData.type;
-            })
-            .map((item) => {
-              return (
-                <ItemCard
-                  key={item._id}
-                  item={item}
-                  onCardClick={handleCardClick}
-                />
-              );
-            })}
+          {filteredItems.map((item) => {
+            return (
+              <ItemCard
+                key={item._id}
+                item={item}
+                onCardClick={handleCardClick}
+              />
+            );
+          })}
         </ul>
       </section>
     </main>
