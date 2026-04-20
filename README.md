@@ -21,3 +21,9 @@ Currently, two official plugins are available:
 
 - Responsive design (375px)
 - Form validation
+
+# Deployment
+
+This webpage is deployed to GitHub Pages.
+
+- Deployent Link: https://d-weimer.github.io/se_project_react/
