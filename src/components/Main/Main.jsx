@@ -4,6 +4,13 @@ import ItemCard from "../ItemCard/ItemCard.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 
 function Main({ weatherData, handleCardClick }) {
+  const filteredItems = defaultClothingItems.filter((item) => {
+    return item.weather === weatherData.type;
+  });
+
+  const isMultiRow = filteredItems.length > 4;
+  const listClassName = `cards__list ${isMultiRow ? "cards__list_rows_multi" : "cards__list_rows_single"}`;
+
   return (
     <main>
       <WeatherCard weatherData={weatherData} />
@@ -11,7 +18,7 @@ function Main({ weatherData, handleCardClick }) {
         <p className="cards__text">
           Today is {weatherData.temp.F}&deg; F / You may want to wear:
         </p>
-        <ul className="cards__list">
+        <ul className={listClassName}>
           {defaultClothingItems
             .filter((item) => {
               return item.weather === weatherData.type;

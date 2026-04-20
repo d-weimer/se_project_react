@@ -17,3 +17,11 @@
   margin: 34px 0 0;
   list-style: none;
 }
+
+.cards__list_rows_single {
+  margin-bottom: 171px;
+}
+
+.cards__list_rows_multi {
+  margin-bottom: 85px;
+}

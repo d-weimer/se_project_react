@@ -93,6 +93,10 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
+.modal__label_type_radio:has(.modal__radio-input:checked) {
+  color: rgba(0, 0, 0, 1);
+}
+
 .modal__radio-input {
   width: 16px;
   height: 16px;
@@ -112,4 +116,8 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.modal__submit:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
