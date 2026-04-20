@@ -3,7 +3,7 @@ import modalClose from "../../assets/modal-close.svg";
 
 function ModalWithForm({ children, title, buttonText, isOpen, onClose }) {
   return (
-    <div className={`modal ${isOpen === "add-garment" ? "modal__opened" : ""}`}>
+    <div className={`modal ${isOpen ? "modal__opened" : ""}`}>
       <div className="modal__content">
         <button onClick={onClose} type="button" className="modal__close">
           <img
