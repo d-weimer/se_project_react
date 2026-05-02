@@ -18,13 +18,17 @@ function ToggleSwitch() {
       <span className="toggle-switch__circle"></span>
       <span
         style={{ color: `${currentTemperatureUnit === "F" ? "#fff" : ""}` }}
-        className="toggle-switch__text toggle-switch__text_f"
+        className={`toggle-switch__text toggle-switch__text_f ${
+          currentTemperatureUnit === "F" ? "toggle-switch__text_active" : ""
+        }`}
       >
         F
       </span>
       <span
         style={{ color: `${currentTemperatureUnit === "C" ? "#fff" : ""}` }}
-        className="toggle-switch__text toggle-switch__text_c"
+        className={`toggle-switch__text toggle-switch__text_c ${
+          currentTemperatureUnit === "C" ? "toggle-switch__text_active" : ""
+        }`}
       >
         C
       </span>
