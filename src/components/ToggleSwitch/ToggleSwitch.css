@@ -1,0 +1,41 @@
+.toggle-switch {
+  width: 56px;
+  height: 28px;
+  position: relative;
+  border: 2px solid #000;
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.toggle-switch__checkbox {
+  opacity: 0;
+}
+
+.toggle-switch__checkbox:checked ~ .toggle-switch__circle {
+  left: 28px;
+}
+
+.toggle-switch__circle {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  left: 0;
+  background-color: #000;
+  border-radius: 50%;
+  transition: all 0.5s;
+}
+
+.toggle-switch__text {
+  position: absolute;
+  top: 4px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.toggle-switch__text_f {
+  left: 8px;
+}
+
+.toggle-switch__text_c {
+  right: 8px;
+}
