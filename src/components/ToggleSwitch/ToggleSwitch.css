@@ -26,7 +26,7 @@
   left: 0;
   background-color: #000;
   border-radius: 50%;
-  transition: all 0.5s;
+  transition: all 0.25s;
 }
 
 .toggle-switch__text {
@@ -41,4 +41,8 @@
 
 .toggle-switch__text_c {
   right: 9px;
+}
+
+.toggle-switch__text_color_white {
+  color: #fff;
 }
