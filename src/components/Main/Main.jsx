@@ -5,7 +5,12 @@ import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTempatureUnitContext.jsx";
 
-function Main({ weatherData, handleCardClick, clothingItems }) {
+function Main({
+  weatherData,
+  handleCardClick,
+  clothingItems,
+  isWeatherDataLoaded,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const filteredItems = clothingItems.filter((item) => {
@@ -17,14 +22,24 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
 
   return (
     <main>
-      <WeatherCard weatherData={weatherData} />
+      <WeatherCard
+        weatherData={weatherData}
+        isWeatherDataLoaded={isWeatherDataLoaded}
+      />
       <section className="cards">
         <p className="cards__text">
           Today is{" "}
-          {currentTemperatureUnit === "F"
-            ? weatherData.temp.fahrenheit
-            : weatherData.temp.celcius}
-          &deg;{currentTemperatureUnit} / You may want to wear:
+          {isWeatherDataLoaded ? (
+            <>
+              {currentTemperatureUnit === "F"
+                ? weatherData.temp.fahrenheit
+                : weatherData.temp.celcius}
+              &deg;{currentTemperatureUnit}
+            </>
+          ) : (
+            " "
+          )}{" "}
+          / You may want to wear:
         </p>
         <ul className={listClassName}>
           {filteredItems.map((item) => {

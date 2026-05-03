@@ -7,7 +7,7 @@ import {
   weatherOptions,
 } from "../../utils/constants.js";
 
-function WeatherCard({ weatherData }) {
+function WeatherCard({ weatherData, isWeatherDataLoaded }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const filteredOptions = weatherOptions.filter((option) => {
@@ -27,10 +27,16 @@ function WeatherCard({ weatherData }) {
   return (
     <section className="weather-card">
       <p className="weather-card__temp">
-        {currentTemperatureUnit === "F"
-          ? weatherData.temp.fahrenheit
-          : weatherData.temp.celcius}
-        &deg;{currentTemperatureUnit}
+        {isWeatherDataLoaded ? (
+          <>
+            {currentTemperatureUnit === "F"
+              ? weatherData.temp.fahrenheit
+              : weatherData.temp.celcius}
+            &deg;{currentTemperatureUnit}
+          </>
+        ) : (
+          " "
+        )}
       </p>
       <img
         className="weather-card__image"
