@@ -1,7 +1,14 @@
 import "./ModalWithForm.css";
 import modalClose from "../../assets/modal-close.svg";
 
-function ModalWithForm({ children, title, buttonText, isOpen, onClose }) {
+function ModalWithForm({
+  children,
+  title,
+  buttonText = "Save",
+  isOpen,
+  onClose,
+  onAddItem,
+}) {
   return (
     <div className={`modal ${isOpen ? "modal__opened" : ""}`}>
       <div className="modal__content">
