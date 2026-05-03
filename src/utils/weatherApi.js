@@ -14,7 +14,10 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
 
 export const filterWeatherData = (data) => {
   const result = {};
-  result.temp = { fahrenheit: data.main.temp };
+  result.temp = {
+    fahrenheit: Math.round(data.main.temp),
+    celcius: Math.round(((data.main.temp - 32) * 5) / 9),
+  };
   result.city = data.name;
   result.type = getWeatherCondition(result.temp.fahrenheit);
   result.condition = data.weather[0].main.toLowerCase();

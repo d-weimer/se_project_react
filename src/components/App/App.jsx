@@ -17,9 +17,10 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
-    temp: { fahrenheit: 999 },
+    temp: { fahrenheit: 999, celcius: 999 },
     city: "",
     condition: "",
+    isDay: false,
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});

@@ -65,5 +65,5 @@
 
 .toggle-switch__text_active {
   mix-blend-mode: difference;
-  color: #fff !important;
+  color: #fff;
 }
