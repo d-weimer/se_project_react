@@ -7,11 +7,8 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTempatureUnitContext.jsx";
-import {
-  defaultClothingItems,
-  coordinates,
-  apiKey,
-} from "../../utils/constants.js";
+import defaultClothingItems from "../../utils/clothingItems.js";
+import { coordinates, apiKey } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 
 function App() {
@@ -39,6 +36,16 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const onAddItem = (inputValues) => {
+    const newCardData = {
+      name: inputValues.name,
+      link: inputValues.link,
+      weather: inputValues.weatherType,
+    };
+    setClothingItems([...clothingItems, newCardData]);
+    closeActiveModal();
   };
 
   const closeActiveModal = () => {
@@ -88,6 +95,7 @@ function App() {
         </div>
         <AddItemModal
           isOpen={activeModal === "add-garment"}
+          onAddItem={onAddItem}
           onCloseModal={closeActiveModal}
         />
         <ItemModal
