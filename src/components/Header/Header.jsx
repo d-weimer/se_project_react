@@ -1,6 +1,6 @@
 import "./Header.css";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
+import avatarDefault from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({ handleAddClick, weatherData }) {
@@ -8,6 +8,9 @@ function Header({ handleAddClick, weatherData }) {
     month: "long",
     day: "numeric",
   });
+
+  const username = "Terrence Tegegne";
+  const avatar = avatarDefault;
 
   return (
     <header className="header">
@@ -24,7 +27,7 @@ function Header({ handleAddClick, weatherData }) {
         >
           + Add clothes
         </button>
-        <p className="header__username">Terrence Tegegne</p>
+        <p className="header__username">{username}</p>
       </div>
       <img className="header__avatar" src={avatar} alt="Terrence Tegegne" />
     </header>
