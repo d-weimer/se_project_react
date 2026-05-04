@@ -1,8 +1,13 @@
 .item-card {
+  font-family: "Cabinet-Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
   position: relative;
   display: flex;
   justify-content: center;
-  width: 323px;
+  width: 325px;
+  height: 328px;
 }
 
 .item-card__name {
@@ -12,16 +17,13 @@
   padding: 2px 12px;
   border-radius: 4px;
   margin: 0 auto;
-  font-family: "Cabinet-Grotesk", sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
   color: rgba(0, 0, 0, 0.6);
 }
 
 .item-card__image {
+  box-sizing: border-box;
   width: 100%;
-  height: 328px;
+  height: 100%;
   object-fit: cover;
   background-color: #e9e9e9;
   border-radius: 19px;
