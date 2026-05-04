@@ -8,6 +8,10 @@
   line-height: 24px;
 }
 
+.header__nav-link_home {
+  margin-top: 12px;
+}
+
 .header__logo {
   margin-right: 24px;
 }
@@ -32,6 +36,14 @@
   font-weight: 700;
 }
 
+.header__nav-link_profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #000;
+}
+
 .header__username {
   padding: 0;
   margin: 0;
@@ -40,5 +52,4 @@
 .header__avatar {
   width: 40px;
   height: 40px;
-  margin-left: 12px;
 }
