@@ -9,7 +9,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTempatureUnitContext.jsx";
-import { getItems } from "../../utils/api.js";
+import { getItems, addItem, removeItem } from "../../utils/api.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 
@@ -43,11 +43,16 @@ function App() {
   const onAddItem = (inputValues) => {
     const newCardData = {
       name: inputValues.name,
-      link: inputValues.link,
+      imageUrl: inputValues.imageUrl,
       weather: inputValues.weatherType,
     };
-    setClothingItems([...clothingItems, newCardData]);
-    closeActiveModal();
+
+    addItem(newCardData)
+      .then((data) => {
+        setClothingItems([data, ...clothingItems]);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const closeActiveModal = () => {
@@ -81,7 +86,8 @@ function App() {
 
     getItems()
       .then((data) => {
-        setClothingItems(data);
+        const reversedData = [...data].reverse();
+        setClothingItems(reversedData);
       })
       .catch(console.error);
   }, []);

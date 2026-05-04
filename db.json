@@ -101,6 +101,23 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
+    },
+    {
+      "name": "wer",
+      "weather": "cold",
+      "_id": 17
+    },
+    {
+      "name": "wer",
+      "imageUrl": "https://www.shutterstock.com/image-photo/brown-leather-hat-isolated-on-260nw-2496183255.jpg",
+      "weather": "cold",
+      "_id": 18
+    },
+    {
+      "name": "wer",
+      "imageUrl": "https://www.shutterstock.com/image-photo/brown-leather-hat-isolated-on-260nw-2496183255.jpg",
+      "weather": "cold",
+      "_id": 19
     }
   ]
 }
