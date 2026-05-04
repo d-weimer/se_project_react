@@ -9,7 +9,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTempatureUnitContext.jsx";
-import defaultClothingItems from "../../utils/clothingItems.js";
+import { getItems } from "../../utils/api.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 
@@ -24,7 +24,7 @@ function App() {
   const [isWeatherDataLoaded, setIsWeatherDataLoaded] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [currentTemperatureUnit, setCurrecntTemperatureUnit] = useState("F");
 
   const handleToggleSwitchChange = () => {
@@ -76,6 +76,12 @@ function App() {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
         setIsWeatherDataLoaded(true);
+      })
+      .catch(console.error);
+
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
