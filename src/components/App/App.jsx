@@ -55,6 +55,16 @@ function App() {
       .catch(console.error);
   };
 
+  const handleDeleteItem = (id) => {
+    removeItem(id)
+      .then(() => {
+        const updatedItems = clothingItems.filter((item) => item._id !== id);
+        setClothingItems(updatedItems);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -133,6 +143,7 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          onDeleteItem={handleDeleteItem}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

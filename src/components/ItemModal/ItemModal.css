@@ -15,9 +15,9 @@
 
 .modal__footer {
   display: flex;
-  flex-direction: column;
-  margin: 0 0 32px 32px;
-  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 32px 32px;
   font-size: 20px;
 }
 
@@ -25,6 +25,17 @@
   margin: 0;
 }
 
+.modal__delete-button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 700;
+  color: #ff4d00;
+}
+
 .modal__weather {
-  margin: 0;
+  margin: 12px 0 0 0;
+  flex-basis: 100%;
 }
