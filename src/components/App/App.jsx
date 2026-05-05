@@ -8,7 +8,7 @@ import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTempatureUnitContext.jsx";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import { getItems, addItem, removeItem } from "../../utils/api.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
@@ -40,7 +40,7 @@ function App() {
     setSelectedCard(card);
   };
 
-  const onAddItem = (inputValues, handleReset) => {
+  const onAddItem = (inputValues) => {
     const newCardData = {
       name: inputValues.name,
       imageUrl: inputValues.imageUrl,
@@ -51,7 +51,6 @@ function App() {
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
         closeActiveModal();
-        handleReset();
       })
       .catch(console.error);
   };

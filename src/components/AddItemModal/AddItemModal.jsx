@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm.js";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
@@ -10,14 +11,20 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
   };
   const { values, handleChange, setValues } = useForm(defaultValues);
 
-  const handleReset = () => {
-    setValues(defaultValues);
-  };
+  const isFormInvalid = !values.name || !values.imageUrl || !values.weatherType;
+
+  useEffect(() => {
+    if (isOpen) {
+      setValues(defaultValues);
+    }
+  }, [isOpen]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    onAddItem(values, handleReset);
+    if (!isFormInvalid) {
+      onAddItem(values);
+    }
   }
 
   return (
@@ -27,13 +34,14 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
       isOpen={isOpen}
       onClose={onCloseModal}
       onSubmit={handleSubmit}
+      isDisabled={isFormInvalid}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
         <input
           type="text"
           name="name"
-          className="modal__input"
+          className={`modal__input ${!values.name ? "modal__input_type_error" : ""}`}
           id="name"
           placeholder="Name"
           required
@@ -42,21 +50,31 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
           value={values.name}
           onChange={handleChange}
         />
-        <span className="modal__error" id="place-name_error" />
+        <span
+          className={`modal__error ${!values.name ? "modal__error_visible" : ""}`}
+          id="name_error"
+        >
+          {!values.name && "Name is required."}
+        </span>
       </label>
       <label htmlFor="imageUrl" className="modal__label">
         Image{" "}
         <input
           type="url"
           name="imageUrl"
-          className="modal__input"
+          className={`modal__input ${!values.imageUrl ? "modal__input_type_error" : ""}`}
           id="imageUrl"
           placeholder="Image URL"
           required
           value={values.imageUrl}
           onChange={handleChange}
         />
-        <span className="modal__error" id="place-link-error" />
+        <span
+          className={`modal__error ${!values.imageUrl ? "modal__error_visible" : ""}`}
+          id="imageUrl-error"
+        >
+          {!values.imageUrl && "Please enter a URL."}
+        </span>
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
@@ -69,6 +87,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
             value="hot"
             checked={values.weatherType === "hot"}
             onChange={handleChange}
+            required
           />
           Hot
         </label>
@@ -96,6 +115,11 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
           />
           Cold
         </label>
+        <span
+          className={`modal__error ${!values.weatherType ? "modal__error_visible" : ""}`}
+        >
+          {!values.weatherType && "Required"}
+        </span>
       </fieldset>
     </ModalWithForm>
   );

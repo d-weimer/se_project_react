@@ -3,7 +3,7 @@ import { useContext } from "react";
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import ItemCard from "../ItemCard/ItemCard.jsx";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTempatureUnitContext.jsx";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 
 function Main({
   weatherData,
@@ -29,16 +29,13 @@ function Main({
       <section className="cards">
         <p className="cards__text">
           Today is{" "}
-          {isWeatherDataLoaded ? (
-            <>
-              {currentTemperatureUnit === "F"
-                ? weatherData.temp.fahrenheit
-                : weatherData.temp.celcius}
-              &deg;{currentTemperatureUnit}
-            </>
-          ) : (
-            " "
-          )}{" "}
+          {isWeatherDataLoaded
+            ? `${
+                currentTemperatureUnit === "F"
+                  ? weatherData.temp.fahrenheit
+                  : weatherData.temp.celcius
+              }°${currentTemperatureUnit}`
+            : " "}{" "}
           / You may want to wear:
         </p>
         <ul className={listClassName}>

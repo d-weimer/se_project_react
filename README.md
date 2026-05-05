@@ -25,12 +25,6 @@ Currently, two official plugins are available:
 - Delete item - Confirm popup
 - Weather conditions
 
-# Deployment
-
-This webpage is deployed to GitHub Pages.
-
-- Deployent Link: https://d-weimer.github.io/se_project_react/
-
 ## Project Pitch Video
 
 Check out these videos, where I describe my project and some challenges I faced while building it:
