@@ -21,6 +21,8 @@ Currently, two official plugins are available:
 
 - Responsive design (375px)
 - Form validation
+- Delete item - Confirm popup
+- Weather conditions
 
 # Deployment
 
