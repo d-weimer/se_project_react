@@ -40,7 +40,7 @@ function App() {
     setSelectedCard(card);
   };
 
-  const onAddItem = (inputValues) => {
+  const onAddItem = (inputValues, resetForm) => {
     const newCardData = {
       name: inputValues.name,
       imageUrl: inputValues.imageUrl,
@@ -50,6 +50,7 @@ function App() {
     addItem(newCardData)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
+        resetForm();
         closeActiveModal();
       })
       .catch(console.error);

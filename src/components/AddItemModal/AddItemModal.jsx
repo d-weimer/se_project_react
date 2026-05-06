@@ -9,21 +9,15 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
     imageUrl: "",
     weatherType: "",
   };
-  const { values, handleChange, setValues } = useForm(defaultValues);
+  const { values, handleChange, handleReset } = useForm(defaultValues);
 
   const isFormInvalid = !values.name || !values.imageUrl || !values.weatherType;
-
-  useEffect(() => {
-    if (isOpen) {
-      setValues(defaultValues);
-    }
-  }, [isOpen]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     if (!isFormInvalid) {
-      onAddItem(values);
+      onAddItem(values, handleReset);
     }
   }
 
