@@ -26,8 +26,6 @@ function RegisterModal({
     handleRegister({ email, password, name, avatar });
   };
 
-  if (!isOpen) return null;
-
   return (
     <ModalWithForm
       title="Sign Up"

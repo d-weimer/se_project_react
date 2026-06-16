@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
@@ -12,6 +13,7 @@ import LoginModal from "../LoginModal/LoginModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import { getItems, addItem, removeItem } from "../../utils/api.js";
+import * as auth from "../../utils/auth.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 
@@ -28,6 +30,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -50,16 +53,31 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleRegister = (userData) => {
-    // TODO: Connect to auth.jsx signup request later
-    console.log("Registering user with:", userData);
-    closeActiveModal();
+  const handleRegister = ({ name, avatar, email, password }) => {
+    auth
+      .registerUser({ name, avatar, email, password })
+      .then((res) => {
+        console.log("Registration successful!", res);
+        handleLoginClick();
+      })
+      .catch((err) => {
+        console.error("Registration failed:", err);
+      });
   };
 
-  const handleLogin = (credentials) => {
-    // TODO: Connect to auth.jsx signin request later
-    console.log("Logging in user with:", credentials);
-    closeActiveModal();
+  const handleLogin = ({ email, password }) => {
+    auth
+      .authorizeUser({ email, password })
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          setIsLoggedIn(true);
+          closeActiveModal();
+        }
+      })
+      .catch((err) => {
+        console.error("Login failed:", err);
+      });
   };
 
   const onAddItem = (inputValues, resetForm) => {
@@ -136,6 +154,7 @@ function App() {
             weatherData={weatherData}
             handleRegisterClick={handleRegisterClick}
             handleLoginClick={handleLoginClick}
+            isLoggedIn={isLoggedIn}
           />
           <Routes>
             <Route
@@ -152,11 +171,13 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  handleAddClick={handleAddClick}
-                  clothingItems={clothingItems}
-                  handleCardClick={handleCardClick}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    handleAddClick={handleAddClick}
+                    clothingItems={clothingItems}
+                    handleCardClick={handleCardClick}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
