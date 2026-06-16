@@ -82,13 +82,14 @@ function App() {
   };
 
   const onAddItem = (inputValues, resetForm) => {
+    const token = localStorage.getItem("jwt");
     const newCardData = {
       name: inputValues.name,
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weatherType,
     };
 
-    addItem(newCardData)
+    addItem(newCardData, token)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
         resetForm();
@@ -98,7 +99,9 @@ function App() {
   };
 
   const handleDeleteItem = (id) => {
-    removeItem(id)
+    const token = localStorage.getItem("jwt");
+
+    removeItem(id, token)
       .then(() => {
         const updatedItems = clothingItems.filter((item) => item._id !== id);
         setClothingItems(updatedItems);
@@ -142,6 +145,27 @@ function App() {
         setClothingItems(reversedData);
       })
       .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+
+    if (!jwt) {
+      return;
+    }
+
+    auth
+      .checkToken(jwt)
+      .then((user) => {
+        setIsLoggedIn(true);
+
+        console.log("Token verified successfully. Welcome back:", user);
+      })
+      .catch((err) => {
+        console.error("Token verification failed:", err);
+        localStorage.removeItem("jwt");
+        setIsLoggedIn(false);
+      });
   }, []);
 
   return (
