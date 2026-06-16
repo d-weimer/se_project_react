@@ -10,13 +10,12 @@ function Header({
   weatherData,
   handleRegisterClick,
   handleLoginClick,
+  isLoggedIn,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
-
-  const isLoggedIn = false;
 
   const username = "User";
   const avatar = avatarDefault;

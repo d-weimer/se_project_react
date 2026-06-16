@@ -58,7 +58,8 @@ function App() {
       .registerUser({ name, avatar, email, password })
       .then((res) => {
         console.log("Registration successful!", res);
-        handleLoginClick();
+
+        handleLogin({ email, password });
       })
       .catch((err) => {
         console.error("Registration failed:", err);
