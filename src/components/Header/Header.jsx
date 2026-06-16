@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./Header.css";
@@ -14,6 +14,11 @@ function Header({
   isLoggedIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
+  const [hasAvatarError, setHasAvatarError] = useState(false);
+
+  useEffect(() => {
+    setHasAvatarError(false);
+  }, [currentUser]);
 
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -45,11 +50,12 @@ function Header({
             </button>
             <NavLink className="header__nav-link_profile" to="/profile">
               <p className="header__username">{currentUser?.name}</p>
-              {currentUser?.avatar ? (
+              {currentUser?.avatar && !hasAvatarError ? (
                 <img
                   className="header__avatar"
                   src={currentUser.avatar}
                   alt={currentUser.name}
+                  onError={() => setHasAvatarError(true)}
                 />
               ) : (
                 <div className="header__avatar-placeholder">{userInitial}</div>

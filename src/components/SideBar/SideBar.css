@@ -15,3 +15,35 @@
   width: 56px;
   height: 56px;
 }
+
+.sidebar__edit-profile-button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.sidebar__edit-profile-button:hover {
+  opacity: 0.6;
+}
+
+.sidebar__avatar-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #56a0ff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 24px;
+  text-transform: uppercase;
+  user-select: none;
+}

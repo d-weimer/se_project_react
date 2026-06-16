@@ -4,7 +4,7 @@ import "./ItemModal.css";
 import modalClose from "../../assets/modal-close-white.svg";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ItemModal({ activeModal, card, onClose, onDeleteItem }) {
+function ItemModal({ activeModal, card, onCloseModal, onDeleteItem }) {
   const currentUser = useContext(CurrentUserContext);
   const isOwn =
     card.owner === currentUser?._id || card.owner?._id === currentUser?._id;
@@ -12,7 +12,7 @@ function ItemModal({ activeModal, card, onClose, onDeleteItem }) {
   return (
     <div className={`modal ${activeModal === "preview" && "modal__opened"}`}>
       <div className="modal__content modal__content_type_image">
-        <button onClick={onClose} type="button" className="modal__close">
+        <button onClick={onCloseModal} type="button" className="modal__close">
           <img
             src={modalClose}
             alt="Close Button"

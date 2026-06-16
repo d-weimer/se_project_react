@@ -10,6 +10,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
@@ -44,6 +45,10 @@ function App() {
 
   const handleLoginClick = () => {
     setActiveModal("login");
+  };
+
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
   };
 
   const handleAddClick = () => {
@@ -88,6 +93,18 @@ function App() {
       .catch((err) => {
         console.error("Login failed:", err);
       });
+  };
+
+  const handleUpdateUser = ({ name, avatar }) => {
+    const token = localStorage.getItem("jwt");
+
+    auth
+      .updateUserProfile({ name, avatar }, token)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const onAddItem = (inputValues, resetForm) => {
@@ -211,6 +228,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
+                      onEditProfileClick={handleEditProfileClick}
                     />
                   </ProtectedRoute>
                 }
@@ -230,6 +248,11 @@ function App() {
             onCloseModal={closeActiveModal}
             openRegisterModal={handleRegisterClick}
           />
+          <EditProfileModal
+            isOpen={activeModal === "edit-profile"}
+            onCloseModal={closeActiveModal}
+            onUpdateUser={handleUpdateUser}
+          />
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             onAddItem={onAddItem}
@@ -238,7 +261,7 @@ function App() {
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
-            onClose={closeActiveModal}
+            onCloseModal={closeActiveModal}
             onDeleteItem={handleDeleteItem}
           />
         </div>
