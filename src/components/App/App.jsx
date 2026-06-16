@@ -7,6 +7,8 @@ import Main from "../Main/Main.jsx";
 import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
+import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import LoginModal from "../LoginModal/LoginModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import { getItems, addItem, removeItem } from "../../utils/api.js";
@@ -31,6 +33,14 @@ function App() {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
+  const handleRegisterClick = () => {
+    setActiveModal("register");
+  };
+
+  const handleLoginClick = () => {
+    setActiveModal("login");
+  };
+
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
@@ -38,6 +48,18 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const handleRegister = (userData) => {
+    // TODO: Connect to auth.jsx signup request later
+    console.log("Registering user with:", userData);
+    closeActiveModal();
+  };
+
+  const handleLogin = (credentials) => {
+    // TODO: Connect to auth.jsx signin request later
+    console.log("Logging in user with:", credentials);
+    closeActiveModal();
   };
 
   const onAddItem = (inputValues, resetForm) => {
@@ -109,7 +131,12 @@ function App() {
     >
       <div className="page">
         <div className="page__content">
-          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+          <Header
+            handleAddClick={handleAddClick}
+            weatherData={weatherData}
+            handleRegisterClick={handleRegisterClick}
+            handleLoginClick={handleLoginClick}
+          />
           <Routes>
             <Route
               path="/"
@@ -135,6 +162,18 @@ function App() {
           </Routes>
           <Footer />
         </div>
+        <RegisterModal
+          isOpen={activeModal === "register"}
+          handleRegister={handleRegister}
+          onCloseModal={closeActiveModal}
+          openLoginModal={handleLoginClick}
+        />
+        <LoginModal
+          isOpen={activeModal === "login"}
+          handleLogin={handleLogin}
+          onCloseModal={closeActiveModal}
+          openRegisterModal={handleRegisterClick}
+        />
         <AddItemModal
           isOpen={activeModal === "add-garment"}
           onAddItem={onAddItem}

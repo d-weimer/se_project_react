@@ -5,13 +5,20 @@ import logo from "../../assets/logo.svg";
 import avatarDefault from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({
+  handleAddClick,
+  weatherData,
+  handleRegisterClick,
+  handleLoginClick,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
 
-  const username = "Terrence Tegegne";
+  const isLoggedIn = false;
+
+  const username = "User";
   const avatar = avatarDefault;
 
   return (
@@ -24,17 +31,39 @@ function Header({ handleAddClick, weatherData }) {
       </p>
       <div className="header__container">
         <ToggleSwitch />
-        <button
-          onClick={handleAddClick}
-          type="button"
-          className="header__add-clothes-button"
-        >
-          + Add clothes
-        </button>
-        <NavLink className="header__nav-link_profile" to="/profile">
-          <p className="header__username">{username}</p>
-          <img className="header__avatar" src={avatar} alt="Terrence Tegegne" />
-        </NavLink>
+
+        {isLoggedIn ? (
+          <>
+            <button
+              onClick={handleAddClick}
+              type="button"
+              className="header__add-clothes-button"
+            >
+              + Add clothes
+            </button>
+            <NavLink className="header__nav-link_profile" to="/profile">
+              <p className="header__username">{username}</p>
+              <img className="header__avatar" src={avatar} alt={username} />
+            </NavLink>
+          </>
+        ) : (
+          <div className="header__auth-container">
+            <button
+              type="button"
+              className="header__auth-button"
+              onClick={handleRegisterClick}
+            >
+              Sign Up
+            </button>
+            <button
+              type="button"
+              className="header__auth-button"
+              onClick={handleLoginClick}
+            >
+              Log In
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );
