@@ -14,7 +14,13 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
-import { getItems, addItem, removeItem } from "../../utils/api.js";
+import {
+  getItems,
+  addItem,
+  removeItem,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api.js";
 import * as auth from "../../utils/auth.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
@@ -136,6 +142,28 @@ function App() {
       .catch(console.error);
   };
 
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+
+    if (!isLiked) {
+      addCardLike(id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === id ? updatedCard : item)),
+          );
+        })
+        .catch((err) => console.error("Error adding like:", err));
+    } else {
+      removeCardLike(id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === id ? updatedCard : item)),
+          );
+        })
+        .catch((err) => console.error("Error removing like:", err));
+    }
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -217,6 +245,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     isWeatherDataLoaded={isWeatherDataLoaded}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -229,6 +258,7 @@ function App() {
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
                       onEditProfileClick={handleEditProfileClick}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }

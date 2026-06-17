@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm.js";
 
+import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 
 const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
@@ -12,6 +13,12 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
   const { values, handleChange, handleReset } = useForm(defaultValues);
 
   const isFormInvalid = !values.name || !values.imageUrl || !values.weatherType;
+
+  useEffect(() => {
+    if (!isOpen) {
+      handleReset();
+    }
+  }, [isOpen]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -35,7 +42,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
         <input
           type="text"
           name="name"
-          className={`modal__input ${!values.name ? "modal__input_type_error" : ""}`}
+          className="modal__input"
           id="name"
           placeholder="Name"
           required
@@ -45,10 +52,10 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
           onChange={handleChange}
         />
         <span
-          className={`modal__error ${!values.name ? "modal__error_visible" : ""}`}
+          className={`modal__error-message ${values.name === "" ? "" : !values.name ? "modal__error-message_visible" : ""}`}
           id="name_error"
         >
-          {!values.name && "Name is required."}
+          Name is required.
         </span>
       </label>
       <label htmlFor="imageUrl" className="modal__label">
@@ -56,7 +63,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
         <input
           type="url"
           name="imageUrl"
-          className={`modal__input ${!values.imageUrl ? "modal__input_type_error" : ""}`}
+          className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
           required
@@ -64,13 +71,13 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
           onChange={handleChange}
         />
         <span
-          className={`modal__error ${!values.imageUrl ? "modal__error_visible" : ""}`}
+          className={`modal__error-message ${values.imageUrl === "" ? "" : !values.imageUrl ? "modal__error-message_visible" : ""}`}
           id="imageUrl-error"
         >
-          {!values.imageUrl && "Please enter a URL."}
+          Please enter a URL.
         </span>
       </label>
-      <fieldset className="modal__radio-buttons">
+      <fieldset className="modal__radio-buttons modal__radio-buttons_type_add-garment">
         <legend className="modal__legend">Select the weather type:</legend>
         <label htmlFor="hot" className="modal__label modal__label_type_radio">
           <input
@@ -110,9 +117,9 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
           Cold
         </label>
         <span
-          className={`modal__error ${!values.weatherType ? "modal__error_visible" : ""}`}
+          className={`modal__error-message ${values.weatherType === "" ? "" : !values.weatherType ? "modal__error-message_visible" : ""}`}
         >
-          {!values.weatherType && "Required"}
+          Required
         </span>
       </fieldset>
     </ModalWithForm>

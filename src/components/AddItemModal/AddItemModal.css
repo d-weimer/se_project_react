@@ -1,0 +1,72 @@
+.modal__radio-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.modal__error-message {
+  display: none;
+  font-size: 12px;
+  color: #ff4d00;
+  margin: 4px 0 0 0;
+}
+
+.modal__error-message_visible {
+  display: block;
+}
+
+.modal__radio-buttons_type_add-garment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: max-content;
+}
+
+.modal__radio-buttons_type_add-garment .modal__legend {
+  margin: 0 0 12px 0;
+  font-family: "Cabinet-Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.modal__radio-buttons_type_add-garment .modal__label_type_radio {
+  display: flex;
+  flex-direction: row; /* Forces the circle dot and text to be side-by-side */
+  align-items: center; /* Centers them vertically together */
+  font-family: "Cabinet-Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.modal__radio-buttons_type_add-garment
+  .modal__label_type_radio:has(.modal__radio-input:checked) {
+  color: rgba(0, 0, 0, 1);
+}
+
+.modal__radio-buttons_type_add-garment .modal__radio-input {
+  width: 16px;
+  height: 16px;
+  margin: 0 8px 0 0; /* Perfect right-hand spacing pushing the text over */
+  cursor: pointer;
+}
+
+.modal__error-message {
+  display: none;
+  font-size: 12px;
+  color: #ff4d00;
+  margin-top: 4px;
+}
+
+.modal__error-message_visible {
+  display: block;
+}

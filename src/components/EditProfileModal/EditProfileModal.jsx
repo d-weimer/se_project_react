@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import "./EditProfileModal.css";
-import modalClose from "../../assets/modal-close-white.svg";
+import modalClose from "../../assets/modal-close.svg";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function EditProfileModal({ isOpen, onCloseModal, onUpdateUser }) {
@@ -49,7 +49,7 @@ function EditProfileModal({ isOpen, onCloseModal, onUpdateUser }) {
             />
           </label>
           <label className="modal__label">
-            Avatar URL *
+            Avatar *
             <input
               type="url"
               name="avatar"
