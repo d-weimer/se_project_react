@@ -16,8 +16,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   pointer-events: none;
+}
+
+.item-card__header:has(.item-card__like-button) {
+  justify-content: center;
+  gap: 10px;
 }
 
 .item-card__name {

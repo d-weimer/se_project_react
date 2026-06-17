@@ -20,6 +20,8 @@ import {
   removeItem,
   addCardLike,
   removeCardLike,
+  getUserInfo,
+  setUserInfo,
 } from "../../utils/api.js";
 import * as auth from "../../utils/auth.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
@@ -89,13 +91,14 @@ function App() {
           setIsLoggedIn(true);
           setAuthError(false);
 
-          auth
-            .checkToken(data.token)
-            .then((userData) => {
-              setCurrentUser(userData);
-              closeActiveModal();
-            })
-            .catch(console.error);
+          return getUserInfo(data.token);
+        }
+        throw new Error("No token returned from server");
+      })
+      .then((userData) => {
+        if (userData) {
+          setCurrentUser(userData);
+          closeActiveModal();
         }
       })
       .catch((err) => {
@@ -107,8 +110,7 @@ function App() {
   const handleUpdateUser = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
 
-    auth
-      .updateUserProfile({ name, avatar }, token)
+    setUserInfo({ name, avatar }, token)
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
         closeActiveModal();
@@ -218,8 +220,7 @@ function App() {
       return;
     }
 
-    auth
-      .checkToken(jwt)
+    getUserInfo(jwt)
       .then((user) => {
         setIsLoggedIn(true);
         setCurrentUser(user);
