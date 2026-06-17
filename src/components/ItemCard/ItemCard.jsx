@@ -16,8 +16,8 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     onCardLike({ id: item._id, isLiked: isLiked });
   };
 
-  const itemLikeButtonClassName = `item-card__like-btn ${
-    isLiked ? "item-card__like-btn_active" : ""
+  const itemLikeButtonClassName = `item-card__like-button ${
+    isLiked ? "item-card__like-button_liked" : ""
   }`;
 
   return (
@@ -26,9 +26,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
       {currentUser && (
         <button
           type="button"
-          className={`item-card__like-button ${
-            isLiked ? "item-card__like-button_liked" : ""
-          }`}
+          className={itemLikeButtonClassName}
           onClick={handleLike}
           aria-label={isLiked ? "Unlike item" : "Like item"}
         />
