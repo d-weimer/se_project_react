@@ -8,6 +8,7 @@ export default function ClothesSection({
   handleAddClick,
   clothingItems,
   handleCardClick,
+  onCardLike,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -36,6 +37,7 @@ export default function ClothesSection({
               key={item._id}
               item={item}
               onCardClick={handleCardClick}
+              onCardLike={onCardLike}
             />
           );
         })}

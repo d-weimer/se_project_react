@@ -22,15 +22,17 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   return (
     <li className="item-card">
-      <p className="item-card__name">{item.name}</p>
-      {currentUser && (
-        <button
-          type="button"
-          className={itemLikeButtonClassName}
-          onClick={handleLike}
-          aria-label={isLiked ? "Unlike item" : "Like item"}
-        />
-      )}
+      <div className="item-card__header">
+        <p className="item-card__name">{item.name}</p>
+        {currentUser && (
+          <button
+            type="button"
+            className={itemLikeButtonClassName}
+            onClick={handleLike}
+            aria-label={isLiked ? "Unlike item" : "Like item"}
+          />
+        )}
+      </div>
       <img
         onClick={handleCardClick}
         className="item-card__image"

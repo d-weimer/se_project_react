@@ -12,6 +12,16 @@ function RegisterModal({
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
 
+  const isFormValid =
+    email.trim() !== "" &&
+    password.trim() !== "" &&
+    name.trim() !== "" &&
+    avatar.trim() !== "";
+
+  const submitButtonClassName = `modal__submit ${
+    isFormValid ? "modal__submit_active" : ""
+  }`;
+
   useEffect(() => {
     if (isOpen) {
       setEmail("");
@@ -33,6 +43,8 @@ function RegisterModal({
       isOpen={isOpen}
       onClose={onCloseModal}
       onSubmit={handleSubmit}
+      isFormValid={isFormValid}
+      buttonClassName={submitButtonClassName}
       altButton={
         <button
           type="button"

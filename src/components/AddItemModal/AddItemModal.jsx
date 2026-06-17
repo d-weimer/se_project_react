@@ -12,7 +12,14 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
   };
   const { values, handleChange, handleReset } = useForm(defaultValues);
 
-  const isFormInvalid = !values.name || !values.imageUrl || !values.weatherType;
+  const isFormValid =
+    values.name.trim() !== "" &&
+    values.imageUrl.trim() !== "" &&
+    values.weatherType !== "";
+
+  const submitButtonClassName = `modal__submit ${
+    isFormValid ? "modal__submit_active" : ""
+  }`;
 
   useEffect(() => {
     if (!isOpen) {
@@ -23,7 +30,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    if (!isFormInvalid) {
+    if (isFormValid) {
       onAddItem(values, handleReset);
     }
   }
@@ -35,7 +42,8 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
       isOpen={isOpen}
       onClose={onCloseModal}
       onSubmit={handleSubmit}
-      isDisabled={isFormInvalid}
+      isDisabled={isFormValid}
+      buttonClassName={submitButtonClassName}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
@@ -52,7 +60,13 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
           onChange={handleChange}
         />
         <span
-          className={`modal__error-message ${values.name === "" ? "" : !values.name ? "modal__error-message_visible" : ""}`}
+          className={`modal__error-message ${
+            values.name === ""
+              ? ""
+              : !values.name
+                ? "modal__error-message_visible"
+                : ""
+          }`}
           id="name_error"
         >
           Name is required.
@@ -71,7 +85,13 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
           onChange={handleChange}
         />
         <span
-          className={`modal__error-message ${values.imageUrl === "" ? "" : !values.imageUrl ? "modal__error-message_visible" : ""}`}
+          className={`modal__error-message ${
+            values.imageUrl === ""
+              ? ""
+              : !values.imageUrl
+                ? "modal__error-message_visible"
+                : ""
+          }`}
           id="imageUrl-error"
         >
           Please enter a URL.
@@ -117,7 +137,13 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
           Cold
         </label>
         <span
-          className={`modal__error-message ${values.weatherType === "" ? "" : !values.weatherType ? "modal__error-message_visible" : ""}`}
+          className={`modal__error-message ${
+            values.weatherType === ""
+              ? ""
+              : !values.weatherType
+                ? "modal__error-message_visible"
+                : ""
+          }`}
         >
           Required
         </span>

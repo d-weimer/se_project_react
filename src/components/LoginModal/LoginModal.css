@@ -1,0 +1,38 @@
+.modal__title {
+  font-family: "Cabinet-Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__submit-container {
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.modal__submit {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: not-allowed;
+  transition: background-color 0.2s ease;
+}
+
+.modal__submit_active {
+  background-color: rgba(0, 0, 0, 1);
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal__error {
+  display: block;
+  font-family: "Cabinet-Grotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  color: #ff4d00;
+  margin: 0;
+  text-align: left;
+}

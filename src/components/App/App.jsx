@@ -40,6 +40,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [authError, setAuthError] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -86,6 +87,7 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           setIsLoggedIn(true);
+          setAuthError(false);
 
           auth
             .checkToken(data.token)
@@ -98,6 +100,7 @@ function App() {
       })
       .catch((err) => {
         console.error("Login failed:", err);
+        setAuthError(true);
       });
   };
 
@@ -285,6 +288,8 @@ function App() {
             handleLogin={handleLogin}
             onCloseModal={closeActiveModal}
             openRegisterModal={handleRegisterClick}
+            authError={authError}
+            clearAuthError={() => setAuthError(false)}
           />
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}

@@ -1,6 +1,12 @@
 .profile {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   gap: 116px;
   margin: -28px 0 80px;
+}
+
+.profile .clothes-section,
+.clothes-section {
+  flex-grow: 1;
 }
