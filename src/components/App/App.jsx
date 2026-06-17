@@ -113,6 +113,13 @@ function App() {
       .catch(console.error);
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem("jwt");
+
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+  };
+
   const onAddItem = (inputValues, resetForm) => {
     const token = localStorage.getItem("jwt");
     const newCardData = {
@@ -259,6 +266,7 @@ function App() {
                       handleCardClick={handleCardClick}
                       onEditProfileClick={handleEditProfileClick}
                       onCardLike={handleCardLike}
+                      onLogOut={handleLogOut}
                     />
                   </ProtectedRoute>
                 }

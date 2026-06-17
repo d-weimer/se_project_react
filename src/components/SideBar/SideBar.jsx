@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import "./SideBar.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-export default function SideBar({ onEditProfileClick }) {
+export default function SideBar({ onEditProfileClick, onLogOut }) {
   const currentUser = useContext(CurrentUserContext);
   const [hasAvatarError, setHasAvatarError] = useState(false);
 
@@ -37,7 +37,14 @@ export default function SideBar({ onEditProfileClick }) {
           onEditProfileClick();
         }}
       >
-        Edit profile
+        Change profile data
+      </button>
+      <button
+        type="button"
+        className="sidebar__logout-button"
+        onClick={onLogOut}
+      >
+        Log out
       </button>
     </aside>
   );
