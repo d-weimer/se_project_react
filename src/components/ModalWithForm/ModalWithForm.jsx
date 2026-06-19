@@ -32,7 +32,7 @@ function ModalWithForm({
           <div className="modal__submit-container">
             <button
               type="submit"
-              className={buttonClassName || "modal__submit"}
+              className={buttonClassName || submitButtonClassName}
               disabled={!isFormValid}
             >
               {buttonText}
