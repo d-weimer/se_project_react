@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && scp -r ./dist/* dweimer19@djw-wtwr.jumpingcrab.com:/home/dweimer19/frontend"
   },
   "dependencies": {
     "react": "^18.3.1",
