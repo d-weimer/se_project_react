@@ -81,7 +81,7 @@ export const coordinates = {
 
 export const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://api.djw-wtwr.jumpingcrab.com"
+    ? "https://danielweimer.net/api/wtwr"
     : "http://localhost:3001";
 
 export const apiKey = "030c2ba96038d604982a8cc130410acc";

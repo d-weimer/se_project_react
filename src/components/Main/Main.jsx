@@ -15,7 +15,8 @@ function Main({
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const filteredItems = clothingItems.filter((item) => {
-    return item.weather === weatherData.type;
+    if (!weatherData.type) return true;
+    return item.weather.toLowerCase() === weatherData.type.toLowerCase();
   });
 
   const isMultiRow = filteredItems.length > 4;
